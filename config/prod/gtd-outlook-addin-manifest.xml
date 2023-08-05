@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp 
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xsi:type="MailApp">
+  
+  <Id>00000000-0000-0000-0000-000000000000</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>BBAK</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="BBAK's GTD Plugin"/>
+  <Description DefaultValue="BBAK's GTD Plugin."/>
+  <IconUrl DefaultValue="https://productivity-hacks.github.io/gtd-outlook-addin/assets/logo.png"/>
+  <HighResolutionIconUrl DefaultValue="https://productivity-hacks.github.io/gtd-outlook-addin/assets/logo.png"/>
+  
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="MailBox" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://productivity-hacks.github.io/gtd-outlook-addin/"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+  <Permissions>ReadWriteMailbox</Permissions>
+  <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+
+    <!-- VersionOverrides for the v1.1 schema -->
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+
+      <Requirements>
+        <bt:Sets DefaultMinVersion="1.5">
+          <bt:Set Name="Mailbox" />
+        </bt:Sets>
+      </Requirements>
+
+      <Hosts>
+        <Host xsi:type="MailHost">
+          <DesktopFormFactor>
+
+            <ExtensionPoint xsi:type="MessageReadCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="msgReadCmdGroup">
+                  <Label resid="groupLabel"/>
+                  <Control xsi:type="Button" id="showInitContext">
+                    <Label resid="viewButtonLabel"/>
+                    <Supertip>
+                      <Title resid="viewButtonTitle"/>
+                      <Description resid="viewButtonDesc"/>
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="icon-16"/>
+                      <bt:Image size="32" resid="icon-32"/>
+                      <bt:Image size="80" resid="icon-80"/>
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="taskPaneUrl"/>
+                      <SupportsPinning>true</SupportsPinning>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
+
+          </DesktopFormFactor>
+        </Host>
+      </Hosts>
+
+      <Resources>
+        <bt:Images>
+          <bt:Image id="icon-16" DefaultValue="https://productivity-hacks.github.io/gtd-outlook-addin/assets/logo.png"/>
+          <bt:Image id="icon-32" DefaultValue="https://productivity-hacks.github.io/gtd-outlook-addin/assets/logo.png"/>
+          <bt:Image id="icon-80" DefaultValue="https://productivity-hacks.github.io/gtd-outlook-addin/assets/logo.png"/>
+        </bt:Images>
+        <bt:Urls>
+          <bt:Url id="taskPaneUrl" DefaultValue="https://productivity-hacks.github.io/gtd-outlook-addin/"/>
+        </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="groupLabel" DefaultValue="Actionable Message Activation"/>
+          <bt:String id="viewButtonLabel" DefaultValue="View Initialization Context"/>
+          <bt:String id="viewButtonTitle" DefaultValue="View Initialization Context"/>
+          <bt:String id="sendButtonLabel" DefaultValue="Send Add-in Activation"/>
+          <bt:String id="sendButtonTitle" DefaultValue="Send Add-in Activation"/>
+        </bt:ShortStrings>
+        <bt:LongStrings>
+          <bt:String id="viewButtonDesc" DefaultValue="Opens a task pane showing the initialization context from the actionable message button"/>
+          <bt:String id="sendButtonDesc" DefaultValue="Converts the message into an add-in activation actionable message"/>
+        </bt:LongStrings>
+      </Resources>
+
+    </VersionOverrides>
+  </VersionOverrides>
+</OfficeApp>
