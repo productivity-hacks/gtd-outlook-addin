@@ -1,0 +1,19 @@
+setopt INTERACTIVE_COMMENTS
+
+# SETUP CONFIG IN ENVIRONMENT VARIABLES
+export GTD_DOCKER_NETWORK=""
+export GTD_CONTAINER_NAME=""
+export GTD_PORT_NUMBER=""
+export NGROK_CONTAINER_NAME=""
+export NGROK_DOMAIN=""
+
+# SETUP SECRETS IN ENVIRONMENT VARIABLES
+chmod +x ./config/$GTD_ENVIRONMENT/secrets.sh
+source ./config/$GTD_ENVIRONMENT/secrets.sh
+
+# PRUNE PRE-EXISTING RESOURCES
+docker kill $NGROK_CONTAINER_NAME
+docker kill $GTD_CONTAINER_NAME
+docker network rm $GTD_DOCKER_NETWORK
+docker network prune -f
+docker container prune -f
